@@ -4,8 +4,6 @@ public class ShowGUI {
 	{
 		Menu j = new Menu(); 
 		j.showMenu(); 
-		
-		
-	}
+    }
 
 }
