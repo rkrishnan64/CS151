@@ -63,7 +63,7 @@ public class Menu
 		photo.add(image3);
 		
 		
-		JButton add = new JButton("Add Image");
+		JButton add = new JButton("Add New");
 		photo.add(add);	
 			class action implements ActionListener{
 				@Override
@@ -75,43 +75,10 @@ public class Menu
 			}
 		add.addActionListener(new action());	
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-		
-		//JPanel EditBar = new JPanel(); 	
-		
-//		//Browse File 
-//		JLabel Search = new JLabel("Image: ");
-//		JTextField SrchText = new JTextField(15); 
-//		JButton Browse = new JButton("Browse");
-//		EditBar.add(Search);
-//		EditBar.add(SrchText);
-//		EditBar.add(Browse);
-//		//Caption
-//		JLabel Caption = new JLabel("Caption: ");
-//		JTextField c = new JTextField(15); 
-//		EditBar.add(Caption);
-//		EditBar.add(c);
-//		myWindow.getContentPane().add(EditBar, BorderLayout.WEST);
-//		
-//		JButton saveCaption = new JButton("Save");
-//		EditBar.add(saveCaption, "Save");
-//		
-//		
-		
-		
+		//Area that shows the actual selected photo
+		JPanel area = new JPanel();
+		myWindow.getContentPane().add(area, BorderLayout.EAST);
+	//	JImageComponent = new JImageComponent(myImageGoesHere);
 		myWindow.setVisible(true); 
 	}
 }
