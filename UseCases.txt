@@ -1,0 +1,67 @@
+Use Cases
+
+1. New Slideshow
+
+1. The user clicks File > New
+
+2. The interface is cleared. The viewer displays a solid color.
+
+2. Open Slideshow
+
+1. The user clicks File > Open, then selects a valid file.
+
+2. That information for that file is loaded into the GUI. The first image in the list is selected. Its information is loaded into the image, and caption fields. The viewer displays that image and its caption.
+
+2.1. Open Slideshow
+
+1. The user clicks File > Open, then selects and invalid file
+
+2. A dialog displays an error message
+
+3. Save Slideshow
+
+1. The user clicks File > Save, then enters a valid file name.
+
+2. The slide show is saved to a text based file format.
+
+4. Exit
+
+1. The user clicks File > Exit
+
+2. The program closes
+
+5. Add New Slide
+
+1. The user clicks the "Add New" button
+
+2. A new image entry is added to the list of images and selected. Blank fields are loaded for the image and caption fields. A solid color is displayed in the viewer.
+
+6. Save Slide
+
+1. The user clicks the "Save" button
+
+2. The currently selected image is saved in the list. The saved image is replaced with the image in the image field, and the saved caption is replaced with the caption in the caption field. The caption on the viewer is updated to reflect any change in the caption.
+
+7. Browse
+
+1. The user clicks the "Browse" button
+
+2. The user selects a valid image
+
+3. The image field is updated with the new image path. The new image is displayed in the viewer with the current caption
+
+7.1. Browse
+
+1. The user clicks the "Browse" button
+
+2. The user selects an invalid file
+
+3. The image field is cleared. The viewer displays a solid color along with the current caption.
+
+8. Select an image
+
+1. The user selects an image from the list of images.
+
+2. The image field is filled with the associated image path. The caption is filled with the appropriate caption. The viewer is updated to display the selected image and caption.
+
+Note: Additional use cases may be added as a result of class discussion.

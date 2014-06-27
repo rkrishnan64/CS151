@@ -39,22 +39,23 @@ public class Menu
 		JTextField field1 = new JTextField(10);
 		JButton browseBtn = new JButton("Browse");
 		JLabel caption = new JLabel("Caption");
+		JButton saveBtn = new JButton("Save");
 		JTextField field2 = new JTextField(10);
 		browse.add(field1);
 		browse.add(browseBtn);
 		browse.add(caption);
 		browse.add(field2);
-		
+		browse.add(saveBtn);
 		//Save button
 		
-		JPanel save = new JPanel();
-		myWindow.getContentPane().add(save, BorderLayout.PAGE_END);
-	
-		JButton saveBtn = new JButton("Save");
-		save.add(saveBtn);
+//		JPanel save = new JPanel();
+//		myWindow.getContentPane().add(save, BorderLayout.PAGE_END);
+//	
+//		
+//		save.add(saveBtn);
 		
 		//Photo List
-		myWindow.getContentPane().add(photo, BoxLayout.LINE_AXIS);
+		myWindow.getContentPane().add(photo, BorderLayout.PAGE_END);
 		JLabel image1 = new  JLabel("imagex");
 		JLabel image2 = new JLabel("imagex");
 		JLabel image3 = new JLabel("imagex");
