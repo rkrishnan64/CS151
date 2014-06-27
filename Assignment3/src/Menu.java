@@ -1,10 +1,13 @@
 
 import javax.swing.*;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Menu
 {
-	
+	public JPanel photo = new JPanel();	
 	public void showMenu()
 	{
 		//File (Top)
@@ -42,12 +45,41 @@ public class Menu
 		browse.add(caption);
 		browse.add(field2);
 		
-  		//Save
-	JPanel save = new JPanel();
-		myWindow.getContentPane().add(save, BorderLayout.AFTER_LINE_ENDS);
+		//Save button
+		
+		JPanel save = new JPanel();
+		myWindow.getContentPane().add(save, BorderLayout.PAGE_END);
 	
 		JButton saveBtn = new JButton("Save");
 		save.add(saveBtn);
+		
+		//Photo List
+		myWindow.getContentPane().add(photo, BoxLayout.LINE_AXIS);
+		JLabel image1 = new  JLabel("imagex");
+		JLabel image2 = new JLabel("imagex");
+		JLabel image3 = new JLabel("imagex");
+		photo.add(image1);
+		photo.add(image2);
+		photo.add(image3);
+		
+		
+		JButton add = new JButton("Add Image");
+		photo.add(add);	
+			class action implements ActionListener{
+				@Override
+				public void actionPerformed(ActionEvent arg0){
+						JButton newButton = new JButton("new image");
+						photo.add(newButton);
+					
+				}
+			}
+		add.addActionListener(new action());	
+		
+		
+		
+		
+		
+		
 		
 		
 		
