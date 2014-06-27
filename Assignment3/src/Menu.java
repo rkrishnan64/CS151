@@ -76,8 +76,8 @@ public class Menu
 		add.addActionListener(new action());	
 		
 		//Area that shows the actual selected photo
-		JPanel area = new JPanel();
-		myWindow.getContentPane().add(area, BorderLayout.EAST);
+//		JPanel area = new JPanel();
+//		myWindow.getContentPane().add(area, BorderLayout.EAST);
 	//	JImageComponent = new JImageComponent(myImageGoesHere);
 		myWindow.setVisible(true); 
 	}
