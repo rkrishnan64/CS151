@@ -8,10 +8,13 @@ import java.awt.event.ActionListener;
 public class Menu
 {
 	public JPanel photo = new JPanel();	
+	public JFrame myWindow = new JFrame("Assignment 3");
+	public Events myEvents = new Events(); 
 	public void showMenu()
 	{
 		//File (Top)
-		JFrame myWindow = new JFrame("Assignment 3");
+		myEvents.theEvents();
+		
 		myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myWindow.setSize(1000,1000); 
 
@@ -30,6 +33,7 @@ public class Menu
 		file.add(Exit);
 
 		myWindow.setJMenuBar(menu);
+		
 		
 		
 		//Left
@@ -53,7 +57,15 @@ public class Menu
 //	
 //		
 //		save.add(saveBtn);
-		
+
+		browseBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				int OpenDialog = myEvents.getChooser().showOpenDialog(myWindow);
+			}
+		});
+	
 		//Photo List
 		myWindow.getContentPane().add(photo, BorderLayout.PAGE_END);
 		JLabel image1 = new  JLabel("imagex");
@@ -81,6 +93,11 @@ public class Menu
 //		myWindow.getContentPane().add(area, BorderLayout.EAST);
 	//	JImageComponent = new JImageComponent(myImageGoesHere);
 		myWindow.setVisible(true); 
+	}
+	
+	public JFrame getWindow()
+	{
+		return myWindow; 
 	}
 }
   
