@@ -9,32 +9,28 @@ import java.util.ArrayList;
 public class Menu
 {
 	public JPanel photo = new JPanel();	
+	public JFrame myWindow = new JFrame("Assignment 3");
+	public Events myEvents = new Events(); 
+	public ControlMenu myControls = new ControlMenu(); 
 	public void showMenu()
 	{
 		//File (Top)
-		JFrame myWindow = new JFrame("Assignment 3");
+		myEvents.theEvents();
+		myControls.Control();
+		
 		myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myWindow.setSize(1000,1000); 
 
-		JMenuBar menu = new JMenuBar();
-		JMenu file = new JMenu("File");
-	    
-		JMenuItem New = new JMenuItem("New");
-		JMenuItem Save = new JMenuItem("Save");
-		JMenuItem Open = new JMenuItem("Open");
-		JMenuItem Exit = new JMenuItem("Exit");
 		
-		menu.add(file);
-		file.add(New);
-		file.add(Save);
-		file.add(Open);
-		file.add(Exit);
-
-		myWindow.setJMenuBar(menu);
+		myWindow.setJMenuBar(myControls.getJMenu());
+		
 		
 		
 		//Left
 		//Browse
+		
+
+		
 		JPanel browse = new JPanel();
 		myWindow.getContentPane().add(browse, BorderLayout.WEST);
 		JTextField field1 = new JTextField(10);
@@ -46,16 +42,26 @@ public class Menu
 		browse.add(browseBtn);
 		browse.add(caption);
 		browse.add(field2);
-		browse.add(saveBtn);
+		
+		
+		
 		//Save button
 		
-//		JPanel save = new JPanel();
-//		myWindow.getContentPane().add(save, BorderLayout.PAGE_END);
-//	
-//		
-//		save.add(saveBtn);
-		
+	//JPanel save = new JPanel();
+	//myWindow.getContentPane().add(save, BorderLayout.PAGE_END);
+	browse.add(saveBtn);
+
+		browseBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				int OpenDialog = myEvents.getChooser().showOpenDialog(myWindow);
+			}
+		});
+	
 		//Photo List
+		
+		//What does this do? Does not make sense. - Kareem 
 		myWindow.getContentPane().add(photo, BorderLayout.PAGE_END);
 		ArrayList<String> images = new ArrayList<String>();
 	    String imagex = "image";
@@ -88,6 +94,11 @@ public class Menu
 //		myWindow.getContentPane().add(area, BorderLayout.EAST);
 	//	JImageComponent = new JImageComponent(myImageGoesHere);
 		myWindow.setVisible(true); 
+	}
+	
+	public JFrame getWindow()
+	{
+		return myWindow; 
 	}
 }
   
