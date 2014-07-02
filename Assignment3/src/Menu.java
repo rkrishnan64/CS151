@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Menu
 {
@@ -56,6 +57,12 @@ public class Menu
 		
 		//Photo List
 		myWindow.getContentPane().add(photo, BorderLayout.PAGE_END);
+		ArrayList<String> images = new ArrayList<String>();
+	    String imagex = "image";
+	    String imagey = "image";
+	    images.add(imagey);
+	    images.add(imagex);
+	    
 		JLabel image1 = new  JLabel("imagex");
 		JLabel image2 = new JLabel("imagex");
 		JLabel image3 = new JLabel("imagex");
