@@ -151,33 +151,7 @@ public class Menu
         
         
         
-        
-        
-        //What does this do? Does not make sense. - Kareem 
-        //Was this supposed to be a part of the viewer of photos to display? - Brian
-/*
-        myWindow.getContentPane().add(photo, BorderLayout.PAGE_END);
-        JLabel image1 = new JLabel("imagex");
-        JLabel image2 = new JLabel("imagex");
-        JLabel image3 = new JLabel("imagex");
-        photo.add(image1);
-        photo.add(image2);
-        photo.add(image3);
 
-
-
-        photo.add(addNew);
-        class action implements ActionListener {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                JButton newButton = new JButton("new image");
-                photo.add(newButton);
-
-            }
-        }
-        addNew.addActionListener(new action());
-*/
 
         /*
          * EVENTS (Buttons)
@@ -206,6 +180,12 @@ public class Menu
          * Need to Implement Save Button
          * 
          */
+        saveButton.addActionListener(new ActionListener(){
+        	@Override 
+        	public void actionPerformed(ActionEvent e){
+        		int OpenDialog = myEvents.getChooser().showOpenDialog(myWindow);
+        	}
+        });
 
         /*
          * Add New button
