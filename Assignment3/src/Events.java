@@ -13,7 +13,7 @@ public class Events
 	
 		
 		//Accepts images of this Extension
-		FileNameExtensionFilter Filter = new FileNameExtensionFilter("Images", "png", "jpg");
+		FileNameExtensionFilter Filter = new FileNameExtensionFilter("img", "png", "jpg");
 		//Give the JFileChooser the Image Filter 
 		F.setFileFilter(Filter); 
 	
