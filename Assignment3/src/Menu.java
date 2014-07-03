@@ -4,8 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class Menu {
+
+public class Menu
+{
+
 
     public JPanel photo = new JPanel();
     public JFrame myWindow = new JFrame("Assignment 3");
@@ -13,7 +17,16 @@ public class Menu {
     public ControlMenu myControls = new ControlMenu();
 
     public void showMenu() {
+<<<<<<< HEAD
         
+=======
+        //JFrame Properties
+        myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myWindow.setSize(800, 600);
+        
+        myWindow.setJMenuBar(myControls.getJMenu());
+
+>>>>>>> origin/master
         //Menubar (File)
         myEvents.theEvents();
         myControls.Control();
@@ -88,6 +101,9 @@ public class Menu {
 
         //Add Panel to ControlBar
         ControlBar.add(savePanel);
+        
+        
+        
 
 
         
@@ -151,6 +167,7 @@ public class Menu {
         
         
         
+<<<<<<< HEAD
         /********************************************************************
          * INNER PANEL viewerPanel
          * viewerPanel is the JPanel for holding the image viewer in a JLabel
@@ -187,6 +204,14 @@ public class Menu {
         ImageViewer.add(viewerCaptionPanel);
         
         /********************************************************************
+=======
+        
+        
+        
+
+
+        /*
+>>>>>>> origin/master
          * EVENTS (Buttons)
          * This area contains the methods for each button:
          * -Browse
@@ -213,12 +238,27 @@ public class Menu {
          * Need to Implement Save Button
          * 
          */
+        saveButton.addActionListener(new ActionListener(){
+        	@Override 
+        	public void actionPerformed(ActionEvent e){
+        		int OpenDialog = myEvents.getChooser().showOpenDialog(myWindow);
+        	}
+        });
 
         /*
          * Add New button
          * Need to Implement Add New Button
          * 
          */
+        addNewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int OpenDialog = myEvents.getChooser().showOpenDialog(myWindow);
+            }
+        });
+        
+        
 
         //~~~~~~~~~~~~~~~~~~~End EVENTS
 
@@ -228,6 +268,7 @@ public class Menu {
 //		JPanel area = new JPanel();
 //		myWindow.getContentPane().add(area, BorderLayout.EAST);
         //	JImageComponent = new JImageComponent(myImageGoesHere);
+<<<<<<< HEAD
      
                
         
@@ -256,6 +297,9 @@ public class Menu {
         }
         addNew.addActionListener(new action());
 */
+=======
+        myWindow.setVisible(true);
+>>>>>>> origin/master
         
         //JFrame Properties
         myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
