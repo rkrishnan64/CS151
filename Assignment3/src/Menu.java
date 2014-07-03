@@ -13,30 +13,29 @@ public class Menu {
     public ControlMenu myControls = new ControlMenu();
 
     public void showMenu() {
-        //JFrame Properties
-        myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myWindow.setSize(800, 600);
-        myWindow.setVisible(true);
-        myWindow.setJMenuBar(myControls.getJMenu());
-
+        
         //Menubar (File)
         myEvents.theEvents();
         myControls.Control();
 
 
-        /*
+        /********************************************************************
          * LEFT SIDE PANEL
-         * ControlBar is the left panel that has all our controls for the program 
+         * ControlBar is the left side panel that has all our controls for the program 
          * Contains an INNER PANEL for each row of components
-         */
+         ********************************************************************/
         JPanel ControlBar = new JPanel();
         ControlBar.setLayout(new BoxLayout(ControlBar, BoxLayout.Y_AXIS));
+        ControlBar.setPreferredSize(new Dimension(330, 600));
+        //ControlBar.setVisible(true);
         myWindow.add(ControlBar, BorderLayout.WEST);
 
+        
 
-        /*
+        /********************************************************************
          * INNER PANEL imagePanel
          * imagePanel is the JPanel for holding Label, TextField, and Button
+         * 
          */
         JPanel imagePanel = new JPanel();
         JLabel imageLabel = new JLabel("  Image: ");
@@ -55,7 +54,7 @@ public class Menu {
 
 
 
-        /*
+        /********************************************************************
          * INNER PANEL CaptionPanel
          * CaptionPanel is the JPanel for holding Label and TextField
          * 
@@ -74,7 +73,7 @@ public class Menu {
 
 
 
-        /*
+        /********************************************************************
          * INNER PANEL savePanel
          * savePanel is the JPanel for holding Label and TextField
          * 
@@ -92,9 +91,10 @@ public class Menu {
 
 
         
-        /*
+        /********************************************************************
          * INNER PANEL photoListPanel
          * photoListPanel is the JPanel for holding List and ScrollPane
+         * 
          */
         JPanel photoListPanel = new JPanel();
         DefaultListModel listModel = new DefaultListModel();
@@ -118,12 +118,10 @@ public class Menu {
         
         //Add Panel to ControlBar
         ControlBar.add(photoListPanel);
+
+
         
-        //What Component can create a List for the photos? - Brian
-
-
-
-        /*
+        /********************************************************************
          * INNER PANEL AddNewButtonPanel
          * addNewButtonPanel is the JPanel for holding Button
          * 
@@ -138,7 +136,100 @@ public class Menu {
         addNewButtonPanel.setPreferredSize(new Dimension(300, 40));
         //Add Panel to ControlBar
         ControlBar.add(addNewButtonPanel);
+ 
+  
+        /********************************************************************
+         * RIGHT SIDE PANEL
+         * ImageViewer is the right side panel that will display images for the program 
+         * Contains an INNER PANEL for each row of components
+         ********************************************************************/
+        JPanel ImageViewer = new JPanel();
+        ImageViewer.setLayout(new BoxLayout(ImageViewer, BoxLayout.Y_AXIS));
+        ImageViewer.setPreferredSize(new Dimension(450, 550));
+        //ImageViewer.setVisible(true);
+        myWindow.add(ImageViewer, BorderLayout.EAST);
         
+        
+        
+        /********************************************************************
+         * INNER PANEL viewerPanel
+         * viewerPanel is the JPanel for holding the image viewer in a JLabel
+         * 
+         */
+        JPanel viewerPanel = new JPanel(); 
+        viewerPanel.setPreferredSize(new Dimension(450,550));
+        ImageIcon image1 = new ImageIcon("cat.png");
+        JLabel catLabel = new JLabel(image1);
+        JLabel viewerLabel = new JLabel("~~~~~~~~~~~~~~~~~~~~~~~~~~~~IMAGE HERE~~~~~~~~~~~~~~~~~~~~~~~~~");
+        
+        //Add Label to Panel
+        viewerPanel.add(catLabel);
+        viewerPanel.add(viewerLabel);
+        
+        //Add Panel to ImageViewer
+        ImageViewer.add(viewerPanel);
+        
+        
+        
+        /********************************************************************
+         * INNER PANEL viewerCaptionPanel
+         * viewerCaption Panel is the JPanel for holding the caption under the image
+         * 
+         */
+        JPanel viewerCaptionPanel = new JPanel();
+        viewerCaptionPanel.setPreferredSize(new Dimension(450, 50));
+        JLabel viewerCaptionLabel = new JLabel("This is the Caption for the Image");
+        
+        //Add Label to Panel
+        viewerCaptionPanel.add(viewerCaptionLabel);
+        
+        //Add Panel to ImageViewer
+        ImageViewer.add(viewerCaptionPanel);
+        
+        /********************************************************************
+         * EVENTS (Buttons)
+         * This area contains the methods for each button:
+         * -Browse
+         * -Save
+         * -Add New
+         ********************************************************************/
+        
+        /*
+         * Browse Button
+         * 
+         * 
+         */
+        browseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int OpenDialog = myEvents.getChooser().showOpenDialog(myWindow);
+            }
+        });
+
+
+        /*
+         * Save button
+         * Need to Implement Save Button
+         * 
+         */
+
+        /*
+         * Add New button
+         * Need to Implement Add New Button
+         * 
+         */
+
+        //~~~~~~~~~~~~~~~~~~~End EVENTS
+
+
+        
+        //Area that shows the actual selected photo
+//		JPanel area = new JPanel();
+//		myWindow.getContentPane().add(area, BorderLayout.EAST);
+        //	JImageComponent = new JImageComponent(myImageGoesHere);
+     
+               
         
         //What does this do? Does not make sense. - Kareem 
         //Was this supposed to be a part of the viewer of photos to display? - Brian
@@ -165,50 +256,14 @@ public class Menu {
         }
         addNew.addActionListener(new action());
 */
-
-        /*
-         * EVENTS (Buttons)
-         * This area will contain the methods for each button:
-         * -Browse
-         * -Save
-         * -Add New
-         */
-
-        /*
-         * Browse Button
-         * 
-         * 
-         */
-        browseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                int OpenDialog = myEvents.getChooser().showOpenDialog(myWindow);
-            }
-        });
-
-
-        /*
-         * Save button
-         * Need to Implement Save Button
-         * 
-         */
-
-        /*
-         * Add New button
-         * Need to Implement Add New Button
-         * See Above where one is added.
-         */
-
-        //~~~~~~~~~~~~~~~~~~~End EVENTS
-
-
-
-        //Area that shows the actual selected photo
-//		JPanel area = new JPanel();
-//		myWindow.getContentPane().add(area, BorderLayout.EAST);
-        //	JImageComponent = new JImageComponent(myImageGoesHere);
         
+        //JFrame Properties
+        myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myWindow.setPreferredSize(new Dimension(800, 600));
+        myWindow.pack();
+        myWindow.setVisible(true);
+        myWindow.setResizable(false);
+        myWindow.setJMenuBar(myControls.getJMenu());
     }
 
     public JFrame getWindow() {
