@@ -97,7 +97,7 @@ public class Menu {
          * 
          */
         JPanel photoListPanel = new JPanel();
-        DefaultListModel listModel = new DefaultListModel();
+        final DefaultListModel listModel = new DefaultListModel();
         
         //JList and Properties
         JList photolist = new JList(listModel);
@@ -108,10 +108,6 @@ public class Menu {
         
         JScrollPane listScrollPane = new JScrollPane(photolist);
         listScrollPane.setPreferredSize(new Dimension(300, 350));
-        //Delete when not needed
-        listModel.addElement("Image 1");
-        listModel.addElement("Image 2");
-        listModel.addElement("Image 3");
         
         //Add ScrollPane to Panel
         photoListPanel.add(listScrollPane);
@@ -219,7 +215,7 @@ public class Menu {
         saveButton.addActionListener(new ActionListener(){
         	@Override 
         	public void actionPerformed(ActionEvent e){
-        		int OpenDialog = myEvents.getChooser().showOpenDialog(myWindow);
+        		int OpenDialog = myEvents.getChooser().showSaveDialog(myWindow);
         	}
         });
 
@@ -233,6 +229,8 @@ public class Menu {
             public void actionPerformed(ActionEvent e) {
 
                 int OpenDialog = myEvents.getChooser().showOpenDialog(myWindow);
+                String ImageSelected = myEvents.getChooser().getSelectedFile().getName();
+                listModel.addElement(ImageSelected);
             }
         });
 
