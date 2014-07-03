@@ -39,7 +39,7 @@ public class Menu {
          */
         JPanel imagePanel = new JPanel();
         JLabel imageLabel = new JLabel("  Image: ");
-        JTextField imageText = new JTextField(11);
+        final JTextField imageText = new JTextField(11);
         JButton browseButton = new JButton("Browse");
         browseButton.setPreferredSize(new Dimension(120, 24));
 
@@ -196,14 +196,17 @@ public class Menu {
         
         /*
          * Browse Button
-         * 
-         * 
+         * Opens up files 
+         * Set the image you select onto the image text field 
          */
         browseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 int OpenDialog = myEvents.getChooser().showOpenDialog(myWindow);
+                String ImageSelected = myEvents.getChooser().getSelectedFile().getAbsolutePath();
+                imageText.setText(ImageSelected);
+                
             }
         });
 
