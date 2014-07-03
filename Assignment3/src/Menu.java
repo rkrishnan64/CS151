@@ -19,36 +19,60 @@ public class Menu
 		
 		myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myWindow.setSize(1000,1000); 
-
-		
 		myWindow.setJMenuBar(myControls.getJMenu());
 		
 		
+		//Control Bar is the left panel that has all our controls for the program 
+		JPanel ControlBar = new JPanel();
+		ControlBar.setLayout(new BoxLayout(ControlBar, BoxLayout.Y_AXIS));
+		//put the image field and browse button in a panel to add to the control bar
 		
-		//Left
-		//Browse
+		JPanel imagePanel = new JPanel();
+		imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.X_AXIS));
+		//contents of image panel, which consist of a textfield and browse button i hard coded the size right now since it wont show properly 
+		JTextField imageTxt = new JTextField();
+		imageTxt.setPreferredSize(new Dimension(200, 1));
+		JButton browseBtn = new JButton();
+		browseBtn.setText("Browse");
+		//added browse and text field to the image panel 
+		imagePanel.add(new JLabel("Image:"));
+		imagePanel.add(imageTxt);
+		imagePanel.add(browseBtn);
+		//added image panel to the control bar
+		ControlBar.add(imagePanel);
+		//Use RigidAreas instead of struts. 
+		ControlBar.add(Box.createRigidArea(new Dimension(10, 10))); 
+		
+		//caption panel where we have the text field for the caption 
+		JPanel CaptionPanel = new JPanel();
+		CaptionPanel.setLayout(new BoxLayout(CaptionPanel, BoxLayout.X_AXIS));
+		JTextField captionField = new JTextField();
+		 //captionField.setPreferredSize(new Dimension(250, 1));
+		//added caption label and the captionfield to the caption panel 
+		CaptionPanel.add(new JLabel("Caption:"));
+		CaptionPanel.add(captionField);
+		//added the caption part to the control panel 
+		ControlBar.add(CaptionPanel);
+		ControlBar.add(Box.createRigidArea(new Dimension(10, 10))); 
 		
 
 		
-		JPanel browse = new JPanel();
-		myWindow.getContentPane().add(browse, BorderLayout.WEST);
-		JTextField field1 = new JTextField(10);
-		JButton browseBtn = new JButton("Browse");
-		JLabel caption = new JLabel("Caption");
+		//save button is supposed to go under the caption bar so i made a new panel 
+		JPanel saveBar = new JPanel();
+		saveBar.setLayout(new BoxLayout(saveBar, BoxLayout.X_AXIS));
 		JButton saveBtn = new JButton("Save");
-		JTextField field2 = new JTextField(10);
-		browse.add(field1);
-		browse.add(browseBtn);
-		browse.add(caption);
-		browse.add(field2);
+		//setMaximumSize for the button 
+		saveBtn.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
+		saveBar.add(saveBtn);
+		ControlBar.add(saveBar);
+		ControlBar.add(Box.createRigidArea(new Dimension(10, 10))); 
 		
+	
+		myWindow.add(ControlBar, BorderLayout.WEST);
 		
 		
 		//Save button
 		
-	//JPanel save = new JPanel();
-	//myWindow.getContentPane().add(save, BorderLayout.PAGE_END);
-	browse.add(saveBtn);
 
 		browseBtn.addActionListener(new ActionListener() {
 			@Override
