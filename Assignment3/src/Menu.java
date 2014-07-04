@@ -18,7 +18,7 @@ public class Menu
     private JFrame myWindow = new JFrame("Assignment 3");
     private Events myEvents = new Events();
     private ControlMenu myControls = new ControlMenu();
-    private ArrayList<Image> storage;
+    private ArrayList<Image> storage = new ArrayList<Image>();
     private JPanel ControlBar = new JPanel();
     
     public void showMenu() 
@@ -64,8 +64,11 @@ public class Menu
 				{
 					File newFile = F.getSelectedFile();
 					writer = new PrintWriter(newFile.getName(), "UTF-8");
-	            	writer.println("The first line");
-	            	writer.println("The second line");
+					for ( int i = 0; i < storage.size(); i++)
+					{
+						writer.println(storage.get(i).getImagePath());
+						writer.println(storage.get(i).getCaption());
+					}
 	            	writer.close();
 				} 
 				catch (Exception E)
@@ -229,10 +232,6 @@ public class Menu
         addNewButtonPanel.setPreferredSize(new Dimension(300, 40));
         //Add Panel to ControlBar
         ControlBar.add(addNewButtonPanel);
-        
-        
-        
-        
         
         
 
