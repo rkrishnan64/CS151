@@ -1,41 +1,44 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.applet.Applet;
-import java.awt.*;
-import java.awt.image.*;
-import java.io.*;
-import java.net.URL;
-import javax.imageio.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
-public class Image extends Applet{
-    
-	/*
-	 * Code to take an image and view it
-	 */
-	private BufferedImage img;
-    
-    public void init() {
-        try {
-            URL url = new URL(getCodeBase(), "examples/strawberry.jpg");
-            img = ImageIO.read(url);
-        } catch (IOException e) {
-        }
-    }
-
-    public void paint(Graphics g) {
-      g.drawImage(img, 50, 50, null);
-    }
-
+public class Image 
+{
+	private String caption;
+	private String imagePath;
 	
-	public void uploadImage(){
+	public Image()
+	{
 		
 	}
-	public void selectImage(){
-		
+	
+	public Image(String newImagePath, String newCaption)
+	{
+		caption = newCaption;
+		imagePath = newImagePath;
 	}
-	public void addNew(){
-		
+	
+	
+	public String getCaption()
+	{
+		return caption;
 	}
-
+	
+	public String getImagePath()
+	{
+		return imagePath;
+	}
+	
+	public void setCaption(String newCaption)
+	{
+		caption = newCaption;
+	}
+	
+	public void setImagePath(String newImagePath)
+	{
+		imagePath = newImagePath;
+	}
 }
