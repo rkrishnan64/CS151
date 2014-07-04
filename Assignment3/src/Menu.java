@@ -1,9 +1,12 @@
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.io.File;
 
 public class Menu {
 
@@ -17,8 +20,73 @@ public class Menu {
         //Menubar (File)
         myEvents.theEvents();
         myControls.Control();
-
-
+        
+        /********************************************************************
+         * MENU BAR
+         * Adds actionListeners to the buttons in myControls.
+         ********************************************************************/
+        
+        myControls.changeNewAction(new ActionListener() 
+		{
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+            	myWindow.dispose();
+            	photo = new JPanel();
+                myWindow = new JFrame("Assignment 3");
+                myEvents = new Events();
+                myControls = new ControlMenu(); 
+                showMenu();
+            }
+        });
+        
+        myControls.changeSaveAction(new ActionListener() 
+		{
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+            	JFileChooser F = new JFileChooser();
+            	F.showSaveDialog(myWindow);
+            }
+        });
+        
+        myControls.changeOpenAction(new ActionListener() 
+		{
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+            	JFileChooser F = new JFileChooser();
+            	FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            	        "Images(jpg, gif, png)", "jpg", "gif", "png");
+                F.setFileFilter(filter);
+                int returnVal = F.showOpenDialog(myWindow);
+                if(returnVal == JFileChooser.APPROVE_OPTION) 
+                {
+                	File newFile = F.getSelectedFile();
+                    String picTest = newFile.getName();
+                    String picTest1 = picTest.substring(picTest.length()-3);
+                    if (picTest1.equalsIgnoreCase("jpg") || picTest1.equalsIgnoreCase("gif") || picTest1.equalsIgnoreCase("png"))
+                    {
+                    	JOptionPane.showMessageDialog(myWindow, picTest + " Opened");
+                    }
+                    else
+                    {
+                    	JOptionPane.showMessageDialog(myWindow, "Invalid file.");
+                    }
+                }
+            }
+        });
+        
+        myControls.changeExitAction(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				WindowEvent windowClosing = new WindowEvent(myWindow, WindowEvent.WINDOW_CLOSING);
+				myWindow.dispatchEvent(windowClosing);
+			}
+		});
+        
         /********************************************************************
          * LEFT SIDE PANEL
          * ControlBar is the left side panel that has all our controls for the program 
