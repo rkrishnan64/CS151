@@ -19,7 +19,8 @@ public class Menu
     private Events myEvents = new Events();
     private ControlMenu myControls = new ControlMenu();
     private ArrayList<Image> storage;
-
+    private JPanel ControlBar = new JPanel();
+    
     public void showMenu() 
     {
         //JFrame Properties
@@ -31,7 +32,7 @@ public class Menu
         //Menubar (File)
         myEvents.theEvents();
         myControls.Control();
-        
+        storage = new ArrayList<Image>();
         /********************************************************************
          * MENU BAR
          * Adds actionListeners to the buttons in myControls.
@@ -116,7 +117,7 @@ public class Menu
          * ControlBar is the left panel that has all our controls for the program 
          * Contains an INNER PANEL for each row of components
          */
-        JPanel ControlBar = new JPanel();
+
         ControlBar.setLayout(new BoxLayout(ControlBar, BoxLayout.Y_AXIS));
         myWindow.add(ControlBar, BorderLayout.WEST);
 
@@ -301,6 +302,8 @@ public class Menu
             @Override
             public void actionPerformed(ActionEvent e) 
             {
+            	Image temp = new Image();
+            	storage.add(temp);
             	
             }
         });
