@@ -127,7 +127,7 @@ public class Menu
          */
         JPanel imagePanel = new JPanel();
         JLabel imageLabel = new JLabel("  Image: ");
-        JTextField imageText = new JTextField(11);
+        final JTextField imageText = new JTextField(11);
         JButton browseButton = new JButton("Browse");
         browseButton.setPreferredSize(new Dimension(120, 24));
 
@@ -258,6 +258,7 @@ public class Menu
             	FileNameExtensionFilter filter = new FileNameExtensionFilter(
             	        "Images(jpg, gif, png)", "jpg", "gif", "png");
                 F.setFileFilter(filter);
+              
                 int returnVal = F.showOpenDialog(myWindow);
                 if(returnVal == JFileChooser.APPROVE_OPTION) 
                 {
@@ -273,6 +274,8 @@ public class Menu
                     	JOptionPane.showMessageDialog(myWindow, "Invalid file.");
                     }
                 }
+                String ImageSelected = F.getSelectedFile().getAbsolutePath();
+                imageText.setText(ImageSelected);
             }
         });
 
