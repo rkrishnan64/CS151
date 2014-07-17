@@ -71,7 +71,7 @@ public class ImageViewer extends JComponent
 		{
 			img = new ImageIcon ( capImage.getImagePath () );
 			captionLabel.setText ( capImage.getCaption () );
-			this.repaint ();
+			this.repaint();
 		}
 	}
 
