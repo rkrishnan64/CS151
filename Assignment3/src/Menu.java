@@ -1,10 +1,13 @@
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.PrintWriter;
@@ -20,6 +23,9 @@ public class Menu
     private ControlMenu myControls = new ControlMenu();
     private ArrayList<Image> storage = new ArrayList<Image>();
     private JPanel ControlBar = new JPanel();
+   // private DefaultListModel<Image> listModel;
+	private JList<Image> list;
+	ImageViewer slidePreview;
     
     public void showMenu() 
     {
@@ -28,7 +34,7 @@ public class Menu
         myWindow.setMinimumSize(new Dimension(800, 800));
         myWindow.pack();
         myWindow.setJMenuBar(myControls.getJMenu());
-
+       
         //Menubar (File)
         myEvents.theEvents();
         myControls.Control();
@@ -37,7 +43,7 @@ public class Menu
          * MENU BAR
          * Adds actionListeners to the buttons in myControls.
          ********************************************************************/
-        
+        /*
         myControls.changeNewAction(new ActionListener() 
 		{
             @Override
@@ -66,7 +72,7 @@ public class Menu
 					writer = new PrintWriter(newFile.getName(), "UTF-8");
 					for ( int i = 0; i < storage.size(); i++)
 					{
-						writer.println(storage.get(i).getImagePath());
+						writer.println( storage.get(i).getImagePath());
 						writer.println(storage.get(i).getCaption());
 					}
 	            	writer.close();
@@ -114,6 +120,7 @@ public class Menu
 				myWindow.dispatchEvent(windowClosing);
 			}
 		});
+		*/
 
         /*
          * LEFT SIDE PANEL
@@ -130,7 +137,7 @@ public class Menu
          * imagePanel is the JPanel for holding Label, TextField, and Button
          */
         JPanel imagePanel = new JPanel();
-        JLabel imageLabel = new JLabel("  Image: ");
+        final JLabel imageLabel = new JLabel("  Image: ");
         final JTextField imageText = new JTextField(11);
         JButton browseButton = new JButton("Browse");
         browseButton.setPreferredSize(new Dimension(120, 24));
@@ -153,7 +160,7 @@ public class Menu
          */
         JPanel captionPanel = new JPanel();
         JLabel captionLabel = new JLabel("Caption: ");
-        JTextField captionField = new JTextField(22);
+        final JTextField captionField = new JTextField(22);
 
         //Add Label and TextField to Panel
         captionPanel.add(captionLabel);
@@ -181,15 +188,44 @@ public class Menu
         //Add Panel to ControlBar
         ControlBar.add(savePanel);
         
-        
+        /*
+         * INNER PANEL photoListPanel
+         * photoListPanel is the JPanel for holding List and ScrollPane
+         */
+		
+        JPanel photoListPanel = new JPanel();
+        final DefaultListModel<Image> listModel = new DefaultListModel<Image>();
         
 
+		//listComponent = new DefaultListModel<Image>();
+		list = new JList<Image>(listModel);
+		//listComponent.addElement(new Image("", ""));
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	    list.setSelectedIndex(0);
+	    list.setVisibleRowCount(5);
+		list.setFont(new Font(null, Font.PLAIN, 30));
+		list.setSelectedIndex(0);
 
+		 JScrollPane listScrollPane = new JScrollPane(list);
+	     listScrollPane.setPreferredSize(new Dimension(300, 350));
+	
+	    JScrollPane listScroll = new JScrollPane(list);
+		listScroll.setPreferredSize(new Dimension(250, 400));
+
+		//Add ScrollPane to Panel
+        photoListPanel.add(listScrollPane);
+        
+        //Add Panel to ControlBar
+        ControlBar.add(photoListPanel);
+		ControlBar.add(Box.createVerticalStrut(5));
+
+	
         
         /*
          * INNER PANEL photoListPanel
          * photoListPanel is the JPanel for holding List and ScrollPane
          */
+		/*
         JPanel photoListPanel = new JPanel();
         DefaultListModel listModel = new DefaultListModel();
         
@@ -215,7 +251,7 @@ public class Menu
         
         //What Component can create a List for the photos? - Brian
 
-
+       */
 
         /*
          * INNER PANEL AddNewButtonPanel
@@ -276,6 +312,7 @@ public class Menu
                 }
                 String ImageSelected = F.getSelectedFile().getAbsolutePath();
                 imageText.setText(ImageSelected);
+            	slidePreview.updateImage(new Image(ImageSelected, ""));
             }
         });
 
@@ -288,7 +325,11 @@ public class Menu
         saveButton.addActionListener(new ActionListener(){
         	@Override 
         	public void actionPerformed(ActionEvent e){
-        		int OpenDialog = myEvents.getChooser().showOpenDialog(myWindow);
+        		list.getSelectedValue().setImagePath(imageText.getText());
+				list.getSelectedValue().setCaption(captionField.getText());
+				list.repaint();
+				
+				slidePreview.updateImage(list.getSelectedValue());
         	}
         });
 
@@ -301,12 +342,30 @@ public class Menu
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-            	Image temp = new Image();
-            	storage.add(temp);
+            	listModel.addElement(new Image("", ""));
+            	 imageText.setText("");
+            	captionField.setText("");
+            	list.setSelectedIndex(listModel.getSize()-1);
+            	slidePreview.updateImage(new Image("", ""));;
             	
             }
         });
         
+        /*
+		 * LIST LISTENER
+		 */
+		list.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (e.getValueIsAdjusting()) {
+					slidePreview.updateImage(list.getSelectedValue());
+					imageLabel.setText(list.getSelectedValue().getImagePath());
+					captionField.setText(list.getSelectedValue().getCaption());
+				}
+			}
+		});
+	
         
 
         //~~~~~~~~~~~~~~~~~~~End EVENTS
@@ -317,6 +376,7 @@ public class Menu
         //JPanel area = new JPanel();
         //myWindow.getContentPane().add(area, BorderLayout.EAST);
         //JImageComponent = new JImageComponent(myImageGoesHere);
+		myWindow.add(slidePreview = new ImageViewer());
         myWindow.setVisible(true);
         
     }
@@ -324,4 +384,6 @@ public class Menu
     public JFrame getWindow() {
         return myWindow;
     }
+
+	
 }
