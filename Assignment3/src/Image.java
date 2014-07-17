@@ -1,45 +1,37 @@
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-
 public class Image 
 {
-	private String caption;
 	private String imagePath;
-	//	
-	//	public Image()
-	//	{
-	//		
-	//	}
-	public Image(String newImagePath, String newCaption)
+	private String imageCaption;
+
+	public Image(String path, String caption) 
 	{
-		caption = newCaption;
-		imagePath = newImagePath;
+		imagePath = path;
+		imageCaption = caption;
 	}
 
-	public String getCaption()
+	public void setImage(String path) 
 	{
-		return caption;
+		imagePath = path;
 	}
 
-	public String getImagePath()
+	public String getImagePath() 
 	{
 		return imagePath;
 	}
 
-	public void setCaption(String newCaption)
+	public void setCaption(String caption) 
 	{
-		caption = newCaption;
+		imageCaption = caption;
 	}
 
-	public void setImagePath(String newImagePath)
+	public String getImageCaption()
 	{
-		imagePath = newImagePath;
+		return imageCaption;
 	}
-	public String toString() {
-		return caption;
+
+	public String toString() 
+	{
+		return imageCaption;
 	}
+
 }

@@ -25,7 +25,7 @@ public class Menu
 	private JPanel ControlBar = new JPanel();
 	// private DefaultListModel<Image> listModel;
 	private JList<Image> list;
-	ImageViewer slidePreview;
+	ImageViewer paintPreview;
 
 	public void showMenu() 
 	{
@@ -38,12 +38,12 @@ public class Menu
 		//Menubar (File)
 		myEvents.theEvents();
 		myControls.Control();
-		storage = new ArrayList<Image>();
+		//storage = new ArrayList<Image>();
 		/********************************************************************
 		 * MENU BAR
 		 * Adds actionListeners to the buttons in myControls.
 		 ********************************************************************/
-		/*
+		
         myControls.changeNewAction(new ActionListener() 
 		{
             @Override
@@ -73,7 +73,7 @@ public class Menu
 					for ( int i = 0; i < storage.size(); i++)
 					{
 						writer.println( storage.get(i).getImagePath());
-						writer.println(storage.get(i).getCaption());
+						writer.println(storage.get(i).getImageCaption());
 					}
 	            	writer.close();
 				} 
@@ -120,7 +120,7 @@ public class Menu
 				myWindow.dispatchEvent(windowClosing);
 			}
 		});
-		 */
+	
 
 		/*
 		 * LEFT SIDE PANEL
@@ -195,22 +195,14 @@ public class Menu
 
 		JPanel photoListPanel = new JPanel();
 		final DefaultListModel<Image> listModel = new DefaultListModel<Image>();
-
-
-		//listComponent = new DefaultListModel<Image>();
 		list = new JList<Image>(listModel);
-		//listComponent.addElement(new Image("", ""));
-//		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//		list.setSelectedIndex(0);
-//		list.setVisibleRowCount(5);
-//		list.setFont(new Font(null, Font.PLAIN, 30));
-//		list.setSelectedIndex(0);
-
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setLayoutOrientation(JList.VERTICAL);
-		list.setFixedCellHeight(30);
-		list.setFont(new Font(null, Font.PLAIN, 30));
 		list.setSelectedIndex(0);
+		list.setFont(new Font(null, Font.PLAIN, 30));
+		list.setFixedCellHeight(30);
+		list.setLayoutOrientation(JList.VERTICAL);
+		
+	
 		JScrollPane listScrollPane = new JScrollPane(list);
 		listScrollPane.setPreferredSize(new Dimension(300, 350));
 
@@ -299,7 +291,6 @@ public class Menu
 				FileNameExtensionFilter filter = new FileNameExtensionFilter(
 						"Images(jpg, gif, png)", "jpg", "gif", "png");
 				F.setFileFilter(filter);
-
 				int returnVal = F.showOpenDialog(myWindow);
 				if(returnVal == JFileChooser.APPROVE_OPTION) 
 				{
@@ -317,7 +308,7 @@ public class Menu
 				}
 				String ImageSelected = F.getSelectedFile().getAbsolutePath();
 				imageText.setText(ImageSelected);
-				slidePreview.updateImage(new Image(ImageSelected, ""));
+				paintPreview.updateImage(new Image(ImageSelected, ""));
 			}
 		});
 
@@ -330,11 +321,11 @@ public class Menu
 		saveButton.addActionListener(new ActionListener(){
 			@Override 
 			public void actionPerformed(ActionEvent e){
-				list.getSelectedValue().setImagePath(imageText.getText());
+				
+				list.getSelectedValue().setImage(imageText.getText());
 				list.getSelectedValue().setCaption(captionField.getText());
 				list.repaint();
-
-				slidePreview.updateImage(list.getSelectedValue());
+				paintPreview.updateImage(list.getSelectedValue());
 			}
 		});
 
@@ -347,11 +338,22 @@ public class Menu
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				listModel.addElement(new Image("", ""));
-				imageText.setText("");
-				captionField.setText("");
-				list.setSelectedIndex(listModel.getSize()-1);
-				slidePreview.updateImage(new Image("", ""));;
+//				listModel.addElement(new Image("", ""));
+//				imageText.setText("");
+//				captionField.setText("");
+//				list.setSelectedIndex(listModel.getSize()-1);
+//				paintPreview.updateImage(new Image("", ""));;
+				
+				    list.repaint ();	//new Slide for convenience
+
+		            paintPreview.updateImage ( list.getSelectedValue () );
+
+		            listModel.addElement (new Image ("" , ""));
+		            imageText.setText("");
+		            captionField.setText("");
+		            list.setSelectedIndex(listModel.getSize()-1);
+		            
+		            paintPreview.updateImage(new Image("", ""));;
 
 			}
 		});
@@ -359,29 +361,26 @@ public class Menu
 		/*
 		 * LIST LISTENER
 		 */
-		list.addListSelectionListener(new ListSelectionListener() {
 
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (e.getValueIsAdjusting()) {
-					slidePreview.updateImage(list.getSelectedValue());
-					imageLabel.setText(list.getSelectedValue().getImagePath());
-					captionField.setText(list.getSelectedValue().getCaption());
-				}
-			}
-		});
 
+		  list.addListSelectionListener(new ListSelectionListener()
+	      {
+	         @Override
+	         public void valueChanged(ListSelectionEvent e)
+	         {
+	            if (e.getValueIsAdjusting())
+	            {
+	               paintPreview.updateImage (list.getSelectedValue());
+	               imageLabel.setText (list.getSelectedValue ().getImagePath());
+	               captionField.setText (list.getSelectedValue().getImageCaption());
+	            }
+	         }
+	      } );
 
 
 		//~~~~~~~~~~~~~~~~~~~End EVENTS
 
-
-
-		//Area that shows the actual selected photo
-		//JPanel area = new JPanel();
-		//myWindow.getContentPane().add(area, BorderLayout.EAST);
-		//JImageComponent = new JImageComponent(myImageGoesHere);
-		myWindow.add(slidePreview = new ImageViewer());
+		myWindow.add(paintPreview = new ImageViewer());
 		myWindow.setVisible(true);
 
 	}
