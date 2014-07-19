@@ -338,13 +338,7 @@ public class Menu
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-//				listModel.addElement(new Image("", ""));
-//				imageText.setText("");
-//				captionField.setText("");
-//				list.setSelectedIndex(listModel.getSize()-1);
-//				paintPreview.updateImage(new Image("", ""));;
-				
-				    list.repaint ();	//new Slide for convenience
+					list.repaint ();	//new Slide for convenience
 
 		            paintPreview.updateImage ( list.getSelectedValue () );
 
