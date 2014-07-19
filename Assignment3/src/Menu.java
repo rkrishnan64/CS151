@@ -23,7 +23,7 @@ public class Menu
 	private ControlMenu myControls = new ControlMenu();
 	private ArrayList<Image> storage = new ArrayList<Image>();
 	private JPanel ControlBar = new JPanel();
-	// private DefaultListModel<Image> listModel;
+	DefaultListModel<Image> listModel;
 	private JList<Image> list;
 	ImageViewer paintPreview;
 
@@ -193,8 +193,11 @@ public class Menu
 		 * photoListPanel is the JPanel for holding List and ScrollPane
 		 */
 
-		JPanel photoListPanel = new JPanel();
-		final DefaultListModel<Image> listModel = new DefaultListModel<Image>();
+	
+		
+		listModel = new DefaultListModel<Image>();
+		//final DefaultListModel<Image> listModel = new DefaultListModel<Image>();
+		listModel.addElement ( new Image ("", ""));
 		list = new JList<Image>(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setSelectedIndex(0);
@@ -202,12 +205,12 @@ public class Menu
 		list.setFixedCellHeight(30);
 		list.setLayoutOrientation(JList.VERTICAL);
 		
-	
+		JPanel photoListPanel = new JPanel();
 		JScrollPane listScrollPane = new JScrollPane(list);
 		listScrollPane.setPreferredSize(new Dimension(300, 350));
 
-		JScrollPane listScroll = new JScrollPane(list);
-		listScroll.setPreferredSize(new Dimension(250, 400));
+		//JScrollPane listScroll = new JScrollPane(list);
+		//listScroll.setPreferredSize(new Dimension(200, 300));
 
 		//Add ScrollPane to Panel
 		photoListPanel.add(listScrollPane);
@@ -215,9 +218,8 @@ public class Menu
 		//Add Panel to ControlBar
 		ControlBar.add(photoListPanel);
 		ControlBar.add(Box.createVerticalStrut(5));
-
-
-
+		
+	
 		/*
 		 * INNER PANEL photoListPanel
 		 * photoListPanel is the JPanel for holding List and ScrollPane
@@ -320,8 +322,8 @@ public class Menu
 		 */
 		saveButton.addActionListener(new ActionListener(){
 			@Override 
-			public void actionPerformed(ActionEvent e){
-				
+			public void actionPerformed(ActionEvent e)
+			{
 				list.getSelectedValue().setImage(imageText.getText());
 				list.getSelectedValue().setCaption(captionField.getText());
 				list.repaint();
@@ -338,15 +340,12 @@ public class Menu
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-					list.repaint ();	//new Slide for convenience
-
-		            paintPreview.updateImage ( list.getSelectedValue () );
-
-		            listModel.addElement (new Image ("" , ""));
+					list.repaint();
+					paintPreview.updateImage (list.getSelectedValue());
+					listModel.addElement (new Image ("" , ""));
 		            imageText.setText("");
 		            captionField.setText("");
 		            list.setSelectedIndex(listModel.getSize()-1);
-		            
 		            paintPreview.updateImage(new Image("", ""));;
 
 			}
@@ -365,15 +364,14 @@ public class Menu
 	            if (e.getValueIsAdjusting())
 	            {
 	               paintPreview.updateImage (list.getSelectedValue());
-	               imageLabel.setText (list.getSelectedValue ().getImagePath());
-	               captionField.setText (list.getSelectedValue().getImageCaption());
+	               imageLabel.setText (list.getSelectedValue().getImagePath());
+	               captionField.setText(list.getSelectedValue().getImageCaption());
 	            }
 	         }
 	      } );
 
 
-		//~~~~~~~~~~~~~~~~~~~End EVENTS
-
+		//~~~~~~~~~~~~~~~~~~End EVENTS
 		myWindow.add(paintPreview = new ImageViewer());
 		myWindow.setVisible(true);
 
