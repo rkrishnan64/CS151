@@ -51,7 +51,7 @@ public class Menu
             {
             	myWindow.dispose();
             	photo = new JPanel();
-                myWindow = new JFrame("Assignment 3");
+                myWindow = new JFrame("Assignment 3 & 4");
                 myEvents = new Events();
                 myControls = new ControlMenu(); 
                 showMenu();
