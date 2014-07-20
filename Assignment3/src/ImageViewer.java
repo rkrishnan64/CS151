@@ -3,8 +3,6 @@ import javax.swing.*;
 
 import java.awt.*;
 
-import javax.swing.plaf.basic.BasicArrowButton;
-
 
 public class ImageViewer extends JComponent
 {
