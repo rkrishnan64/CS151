@@ -29,7 +29,7 @@ public class ImageViewer extends JComponent
 		this.add(captPnl, GBC);
 	}
 
-	public void repaintlImage (Image capImage)
+	public void repaintImage (Image capImage)
 	{
 		if (capImage != null)
 		{
