@@ -44,7 +44,6 @@ public class ImageViewer extends JComponent
 		Graphics2D g2 = (Graphics2D) g;
 		if (img != null)
 		{
-			
 			g2.drawImage (img.getImage() , 10 , 10 , this.getWidth() - 10 , this.getHeight() - 25 , 0 , 0 , img.getIconWidth() , img.getIconHeight() , null);
 		}
 		captionLabel.repaint();
