@@ -20,9 +20,10 @@ public class ImageViewer extends JComponent
 		captionLabel = new JLabel ("IMAGE CAPTION HERE");
 		captionLabel.setFont (new Font( null , Font.PLAIN , 24 ) );
 		gridBagConstraints = new GridBagConstraints();
-		gridBagConstraints.anchor = GridBagConstraints.SOUTH;
 		gridBagConstraints.weightx = 2;
 		gridBagConstraints.weighty = 3;
+		gridBagConstraints.anchor = GridBagConstraints.SOUTH;
+		
 		captPnl.add(captionLabel);
 		captPnl.add(imgBtnPnl);
 		this.add(captPnl, gridBagConstraints);
@@ -39,13 +40,12 @@ public class ImageViewer extends JComponent
 	}
 	@Override
 	public void paint(Graphics g)
-	{
+	{	
 		Graphics2D g2 = (Graphics2D) g;
-		
-		if ( img != null )
+		if (img != null)
 		{
 			
-			g2.drawImage ( img.getImage() , 10 , 10 , this.getWidth() - 10 , this.getHeight() - 25 , 0 , 0 , img.getIconWidth() , img.getIconHeight() , null);
+			g2.drawImage (img.getImage() , 10 , 10 , this.getWidth() - 10 , this.getHeight() - 25 , 0 , 0 , img.getIconWidth() , img.getIconHeight() , null);
 		}
 		captionLabel.repaint();
 
