@@ -310,7 +310,7 @@ public class Menu
 				}
 				String ImageSelected = F.getSelectedFile().getAbsolutePath();
 				imageText.setText(ImageSelected);
-				paintPreview.updateImage(new Image(ImageSelected, ""));
+				paintPreview.repaintImage(new Image(ImageSelected, ""));
 			}
 		});
 
@@ -327,7 +327,7 @@ public class Menu
 				list.getSelectedValue().setImage(imageText.getText());
 				list.getSelectedValue().setCaption(captionField.getText());
 				list.repaint();
-				paintPreview.updateImage(list.getSelectedValue());
+				paintPreview.repaintImage(list.getSelectedValue());
 			}
 		});
 
@@ -341,12 +341,12 @@ public class Menu
 			public void actionPerformed(ActionEvent e) 
 			{
 					list.repaint();
-					paintPreview.updateImage (list.getSelectedValue());
+					paintPreview.repaintImage(list.getSelectedValue());
 					listModel.addElement (new Image ("" , ""));
 		            imageText.setText("");
 		            captionField.setText("");
 		            list.setSelectedIndex(listModel.getSize()-1);
-		            paintPreview.updateImage(new Image("", ""));;
+		            paintPreview.repaintImage(new Image("", ""));;
 
 			}
 		});
@@ -363,7 +363,7 @@ public class Menu
 	         {
 	            if (e.getValueIsAdjusting())
 	            {
-	               paintPreview.updateImage (list.getSelectedValue());
+	               paintPreview.repaintImage(list.getSelectedValue());
 	               imageLabel.setText (list.getSelectedValue().getImagePath());
 	               captionField.setText(list.getSelectedValue().getImageCaption());
 	            }

@@ -9,7 +9,7 @@ public class ImageViewer extends JComponent
 	private ImageIcon img;
 	private JLabel captionLabel;
 	private JPanel captPnl, imgBtnPnl;
-	private GridBagConstraints gridBagConstraints;
+	private GridBagConstraints GBC; //Constraints 
 
 	public ImageViewer ()
 	{
@@ -19,17 +19,17 @@ public class ImageViewer extends JComponent
 		this.setLayout(new GridBagLayout());
 		captionLabel = new JLabel ("IMAGE CAPTION HERE");
 		captionLabel.setFont (new Font( null , Font.PLAIN , 24 ) );
-		gridBagConstraints = new GridBagConstraints();
-		gridBagConstraints.weightx = 2;
-		gridBagConstraints.weighty = 3;
-		gridBagConstraints.anchor = GridBagConstraints.SOUTH;
+		GBC = new GridBagConstraints();
+		GBC.weightx = 3;
+		GBC.weighty = 3;
+		GBC.anchor = GridBagConstraints.NORTH;
 		
 		captPnl.add(captionLabel);
 		captPnl.add(imgBtnPnl);
-		this.add(captPnl, gridBagConstraints);
+		this.add(captPnl, GBC);
 	}
 
-	public void updateImage (Image capImage)
+	public void repaintImage (Image capImage)
 	{
 		if (capImage != null)
 		{
