@@ -8,34 +8,24 @@ public class ImageViewer extends JComponent
 {
 	private ImageIcon img;
 	private JLabel captionLabel;
-	private JPanel captionPanel, imageButtonPanel, toggleOptionsPanel;
+	private JPanel captPnl, imgBtnPnl;
 	private GridBagConstraints gridBagConstraints;
 
 	public ImageViewer ()
 	{
-		captionPanel = new JPanel();
-		imageButtonPanel = new JPanel();
-		toggleOptionsPanel = new JPanel();
-
-		captionPanel.setLayout(new BoxLayout (captionPanel , BoxLayout.Y_AXIS));
-
+		captPnl = new JPanel();
+		imgBtnPnl = new JPanel();
+		captPnl.setLayout(new BoxLayout (captPnl , BoxLayout.Y_AXIS));
 		this.setLayout(new GridBagLayout());
-
 		captionLabel = new JLabel ("IMAGE CAPTION HERE");
-		captionLabel.setFont (new Font( null , Font.PLAIN , 22 ) );
-
-
+		captionLabel.setFont (new Font( null , Font.PLAIN , 24 ) );
 		gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.anchor = GridBagConstraints.SOUTH;
 		gridBagConstraints.weightx = 2;
 		gridBagConstraints.weighty = 3;
-
-		captionPanel.add(captionLabel);
-		captionPanel.add(imageButtonPanel);
-		captionPanel.add(toggleOptionsPanel);
-
-		this.add(captionPanel, gridBagConstraints);
-
+		captPnl.add(captionLabel);
+		captPnl.add(imgBtnPnl);
+		this.add(captPnl, gridBagConstraints);
 	}
 
 	public void updateImage (Image capImage)
@@ -47,11 +37,6 @@ public class ImageViewer extends JComponent
 			this.repaint();
 		}
 	}
-
-
-	//
-	// Paints image and resizes to size of window
-	//
 	@Override
 	public void paint(Graphics g)
 	{
@@ -59,7 +44,7 @@ public class ImageViewer extends JComponent
 		
 		if ( img != null )
 		{
-			//first 4 ints are desired size of image, last 4 are size of image
+			
 			g2.drawImage ( img.getImage() , 10 , 10 , this.getWidth() - 10 , this.getHeight() - 25 , 0 , 0 , img.getIconWidth() , img.getIconHeight() , null);
 		}
 		captionLabel.repaint();
