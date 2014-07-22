@@ -13,18 +13,22 @@ public class ControlMenu
 	private JMenuBar menu = new JMenuBar();
 	
 	JMenu file = new JMenu("File");
+	JMenu edit = new JMenu("Edit");
     
 	JMenuItem New = new JMenuItem("New");
 	JMenuItem Save = new JMenuItem("Save");
 	JMenuItem Open = new JMenuItem("Open");
 	JMenuItem Exit = new JMenuItem("Exit");
+	JMenuItem Undo = new JMenuItem("Undo");
 	public void Control()
 	{
 		menu.add(file);
+		menu.add(edit);
 		file.add(New);
 		file.add(Save);
 		file.add(Open);
 		file.add(Exit);
+		edit.add(Undo);
 	}
 	
 	public JMenuBar getJMenu()
@@ -50,4 +54,5 @@ public class ControlMenu
 	{
 		Exit.addActionListener(a);
 	}
+	
 }
