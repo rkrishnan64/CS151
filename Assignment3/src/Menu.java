@@ -18,7 +18,7 @@ public class Menu
 
 
 	private JPanel photo = new JPanel();
-	private JFrame myWindow = new JFrame("Assignment 3");
+	private JFrame myWindow = new JFrame("Assignment 4");
 	private Events myEvents = new Events();
 	private ControlMenu myControls = new ControlMenu();
 	private ArrayList<Image> storage = new ArrayList<Image>();
