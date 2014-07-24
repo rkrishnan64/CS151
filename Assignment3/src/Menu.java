@@ -70,10 +70,11 @@ public class Menu
 				{
 					File newFile = F.getSelectedFile();
 					writer = new PrintWriter(newFile.getName(), "UTF-8");
-					for ( int i = 0; i < storage.size(); i++)
+					int size = listModel.getSize();
+					for (int i = 0; i < size; i++)
 					{
-						writer.println( storage.get(i).getImagePath());
-						writer.println(storage.get(i).getImageCaption());
+						writer.println(listModel.getElementAt(i).getImagePath());
+						writer.println(listModel.getElementAt(i).getImageCaption());
 					}
 	            	writer.close();
 				} 
@@ -169,7 +170,7 @@ public class Menu
 		captionPanel.setPreferredSize(new Dimension(300, 20));
 		//Add captionPanel to the ControlBar
 		ControlBar.add(captionPanel);
-
+        
 
 
 		/*
