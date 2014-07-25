@@ -23,6 +23,7 @@ public class Menu
 	private ControlMenu myControls = new ControlMenu();
 	private ArrayList<Image> storage = new ArrayList<Image>();
 	private JPanel ControlBar = new JPanel();
+	private JPanel imgPanel = new JPanel();
 	DefaultListModel<Image> listModel;
 	private JList<Image> list;
 	ImageViewer paintPreview;
@@ -373,7 +374,9 @@ public class Menu
 
 
 		//~~~~~~~~~~~~~~~~~~End EVENTS
-		myWindow.add(paintPreview = new ImageViewer());
+		imgPanel.setLayout(null);
+		imgPanel.add(paintPreview = new ImageViewer(imgPanel));
+		myWindow.add(imgPanel, BorderLayout.CENTER);
 		myWindow.setVisible(true);
 
 	}

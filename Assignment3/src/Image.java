@@ -9,6 +9,8 @@ public class Image
 	{
 		imagePath = path;
 		imageCaption = caption;
+		X = 100;
+		Y = 0;
 	}
 
 	public void setImage(String path) 

@@ -8,45 +8,40 @@ public class ImageViewer extends JComponent
 {
 	private ImageIcon img;
 	private JLabel captionLabel;
-	private JPanel captPnl, imgBtnPnl;
 	private GridBagConstraints GBC; //Constraints 
+	private Draggable movable;
+	private JPanel myP;
 
-	public ImageViewer ()
+	public ImageViewer (JPanel myPanel)
 	{
-		captPnl = new JPanel();
-		imgBtnPnl = new JPanel();
-		captPnl.setLayout(new BoxLayout (captPnl , BoxLayout.Y_AXIS));
-		this.setLayout(new GridBagLayout());
 		captionLabel = new JLabel ("IMAGE CAPTION HERE");
 		captionLabel.setFont (new Font( null , Font.PLAIN , 24 ) );
-		GBC = new GridBagConstraints();
-		GBC.weightx = 3;
-		GBC.weighty = 3;
-		GBC.anchor = GridBagConstraints.NORTH;
+		captionLabel.setBounds(100, 0, 400, 40);
+		myP = myPanel;
 		
-		captPnl.add(captionLabel);
-		captPnl.add(imgBtnPnl);
-		this.add(captPnl, GBC);
+		myP.add(captionLabel);
 	}
 
 	public void repaintImage (Image capImage)
 	{
 		if (capImage != null)
 		{
+			myP.repaint();
 			img = new ImageIcon(capImage.getImagePath());
 			captionLabel.setText(capImage.getImageCaption());
-			this.repaint();
+			movable = new Draggable(captionLabel, 100, 0);
+			myP.add(movable);
 		}
 	}
 	@Override
-	public void paint(Graphics g)
+	public void paintComponent(Graphics g)
 	{	
 		Graphics2D g2 = (Graphics2D) g;
 		if (img != null)
 		{
-			g2.drawImage (img.getImage() , 10 , 10 , this.getWidth() - 10 , this.getHeight() - 25 , 0 , 0 , img.getIconWidth() , img.getIconHeight() , null);
+			g2.drawImage (img.getImage() , 0, 0, null);
 		}
-		captionLabel.repaint();
+		movable.repaint();
 
 	}
 }
