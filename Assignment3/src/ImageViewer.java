@@ -18,6 +18,7 @@ public class ImageViewer extends JComponent
 		captionLabel = new JLabel ("IMAGE CAPTION HERE");
 		captionLabel.setFont (new Font( null , Font.PLAIN , 24 ) );
 		captionLabel.setBounds(100, 0, 400, 40);
+		captionLabel.setOpaque(true);
 		this.add(captionLabel);
 	}
 
@@ -28,7 +29,7 @@ public class ImageViewer extends JComponent
 			this.repaint();
 			img = new ImageIcon(capImage.getImagePath());
 			captionLabel.setText(capImage.getImageCaption());
-			movable = new Draggable(captionLabel, 100, 0);
+			movable = new Draggable(captionLabel, capImage);
 			this.add(movable);
 		}
 	}

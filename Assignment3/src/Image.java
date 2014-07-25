@@ -9,7 +9,7 @@ public class Image
 	{
 		imagePath = path;
 		imageCaption = caption;
-		X = 100;
+		X = 230;
 		Y = 0;
 	}
 
