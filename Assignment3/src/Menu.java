@@ -8,8 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 
@@ -17,13 +21,10 @@ public class Menu
 {
 
 
-	private JPanel photo = new JPanel();
 	private JFrame myWindow = new JFrame("Assignment 4");
 	private Events myEvents = new Events();
 	private ControlMenu myControls = new ControlMenu();
-	private ArrayList<Image> storage = new ArrayList<Image>();
 	private JPanel ControlBar = new JPanel();
-	private JPanel imgPanel = new JPanel();
 	DefaultListModel<Image> listModel;
 	private JList<Image> list;
 	ImageViewer paintPreview;
@@ -51,10 +52,12 @@ public class Menu
             public void actionPerformed(ActionEvent e) 
             {
             	myWindow.dispose();
-            	photo = new JPanel();
-                myWindow = new JFrame("Assignment 3 & 4");
+                myWindow = new JFrame("Assignment 4");
                 myEvents = new Events();
-                myControls = new ControlMenu(); 
+                myControls = new ControlMenu();
+                ControlBar = new JPanel();
+                list = new JList<Image>();
+                listModel = new DefaultListModel<Image>();
                 showMenu();
             }
         });
@@ -70,12 +73,17 @@ public class Menu
 				try 
 				{
 					File newFile = F.getSelectedFile();
-					writer = new PrintWriter(newFile.getName(), "UTF-8");
+					writer = new PrintWriter(
+							new OutputStreamWriter(
+									new FileOutputStream(newFile.getAbsolutePath()),"UTF-8"));
 					int size = listModel.getSize();
 					for (int i = 0; i < size; i++)
 					{
 						writer.println(listModel.getElementAt(i).getImagePath());
 						writer.println(listModel.getElementAt(i).getImageCaption());
+						writer.println(listModel.getElementAt(i).getX());
+						writer.println(listModel.getElementAt(i).getY());
+						
 					}
 	            	writer.close();
 				} 
@@ -104,6 +112,33 @@ public class Menu
                     if (picTest1.equalsIgnoreCase("txt"))
                     {
                     	JOptionPane.showMessageDialog(myWindow, picTest + " Opened");
+                    	myWindow.dispose();
+                        myWindow = new JFrame("Assignment 4");
+                        myEvents = new Events();
+                        myControls = new ControlMenu();
+                        ControlBar = new JPanel();
+                        list = new JList<Image>();
+                        listModel = new DefaultListModel<Image>();
+                        showMenu();
+                    	try 
+                    	{
+							Scanner in = new Scanner(newFile);
+							while(in.hasNext())
+							{
+								String path = in.nextLine();
+								String caption = in.nextLine();
+								int x = Integer.parseInt(in.nextLine());
+								int y = Integer.parseInt(in.nextLine());
+								Image image = new Image(path, caption);
+								image.setX(x);
+								image.setY(y);
+								listModel.addElement(image);
+							}
+						} 
+                    	catch (FileNotFoundException e1) 
+                    	{
+							e1.printStackTrace();
+						}
                     }
                     else
                     {
