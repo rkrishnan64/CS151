@@ -374,9 +374,8 @@ public class Menu
 
 
 		//~~~~~~~~~~~~~~~~~~End EVENTS
-		imgPanel.setLayout(null);
-		imgPanel.add(paintPreview = new ImageViewer(imgPanel));
-		myWindow.add(imgPanel, BorderLayout.CENTER);
+		paintPreview = new ImageViewer();
+		myWindow.add(paintPreview, BorderLayout.CENTER);
 		myWindow.setVisible(true);
 
 	}

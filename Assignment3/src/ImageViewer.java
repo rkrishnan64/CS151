@@ -12,25 +12,24 @@ public class ImageViewer extends JComponent
 	private Draggable movable;
 	private JPanel myP;
 
-	public ImageViewer (JPanel myPanel)
+	public ImageViewer()
 	{
+		this.setLayout(null);
 		captionLabel = new JLabel ("IMAGE CAPTION HERE");
 		captionLabel.setFont (new Font( null , Font.PLAIN , 24 ) );
 		captionLabel.setBounds(100, 0, 400, 40);
-		myP = myPanel;
-		
-		myP.add(captionLabel);
+		this.add(captionLabel);
 	}
 
 	public void repaintImage (Image capImage)
 	{
 		if (capImage != null)
 		{
-			myP.repaint();
+			this.repaint();
 			img = new ImageIcon(capImage.getImagePath());
 			captionLabel.setText(capImage.getImageCaption());
 			movable = new Draggable(captionLabel, 100, 0);
-			myP.add(movable);
+			this.add(movable);
 		}
 	}
 	@Override
@@ -39,9 +38,13 @@ public class ImageViewer extends JComponent
 		Graphics2D g2 = (Graphics2D) g;
 		if (img != null)
 		{
-			g2.drawImage (img.getImage() , 0, 0, null);
+			super.paintComponent(g);
+	        g.drawImage(img.getImage() , 10 , 10 , this.getWidth() - 10 , this.getHeight() - 25 , 0 , 0 , img.getIconWidth() , img.getIconHeight() , null);
 		}
-		movable.repaint();
+		if (movable != null)
+		{
+			movable.repaint();
+		}
 
 	}
 }
