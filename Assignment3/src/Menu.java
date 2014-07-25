@@ -1,7 +1,10 @@
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.undo.UndoManager;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +31,9 @@ public class Menu
 	DefaultListModel<Image> listModel;
 	private JList<Image> list;
 	ImageViewer paintPreview;
-
+	protected UndoAction undoAction;
+    protected UndoManager undo = new UndoManager();
+    
 	public void showMenu() 
 	{
 		//JFrame Properties
@@ -37,6 +42,8 @@ public class Menu
 		myWindow.pack();
 		myWindow.setJMenuBar(myControls.getJMenu());
 
+		
+		
 		//Menubar (File)
 		myEvents.theEvents();
 		myControls.Control();
@@ -411,6 +418,7 @@ public class Menu
 		//~~~~~~~~~~~~~~~~~~End EVENTS
 		paintPreview = new ImageViewer();
 		myWindow.add(paintPreview, BorderLayout.CENTER);
+		
 		myWindow.setVisible(true);
 
 	}
@@ -418,6 +426,42 @@ public class Menu
 	public JFrame getWindow() {
 		return myWindow;
 	}
-
-
+	
+	protected class MyUndoableEditListener implements UndoableEditListener
+	{
+		@Override
+		public void undoableEditHappened(UndoableEditEvent e)
+		{
+			undo.addEdit(e.getEdit());
+			undoAction.updateUndoState();
+		}	
+	}
+	
+	class UndoAction extends AbstractAction
+	{
+		public UndoAction()
+		{
+			super("Undo");
+			setEnabled(false);
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			
+		}
+		protected void updateUndoState()
+		{
+			if (undo.canUndo())
+			{
+				setEnabled(true);
+				putValue(Action.NAME, undo.getUndoPresentationName());
+			}
+			else
+			{
+				setEnabled(false);
+				putValue(Action.NAME, "UNDO");
+			}
+		}
+	}
+	
 }

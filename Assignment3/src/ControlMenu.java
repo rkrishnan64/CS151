@@ -1,14 +1,22 @@
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.event.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.undo.*;
+
+
 
 /*
  * Class that dictates the button clicks & various actions available in the menu.
  * Includes new, save, open, exit
  */
-public class ControlMenu
+public class ControlMenu extends JFrame
 {
 	private JMenuBar menu = new JMenuBar();
 	
@@ -19,7 +27,9 @@ public class ControlMenu
 	JMenuItem Save = new JMenuItem("Save");
 	JMenuItem Open = new JMenuItem("Open");
 	JMenuItem Exit = new JMenuItem("Exit");
-	JMenuItem Undo = new JMenuItem("Undo");
+	UndoManager undoManager = new UndoManager();
+	UndoAction undoAction = new UndoAction();
+	
 	public void Control()
 	{
 		menu.add(file);
@@ -27,8 +37,8 @@ public class ControlMenu
 		file.add(New);
 		file.add(Save);
 		file.add(Open);
-		file.add(Exit);
-		edit.add(Undo);
+		file.add(Exit);;
+		edit.add(undoAction);
 	}
 	
 	public JMenuBar getJMenu()
@@ -55,4 +65,27 @@ public class ControlMenu
 		Exit.addActionListener(a);
 	}
 	
+	class UndoAction extends AbstractAction
+	{
+		public UndoAction()
+		{
+			this.putValue(Action.NAME, undoManager.getUndoPresentationName());
+		    this.setEnabled(false);
+		}
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			if(this.isEnabled())
+			{
+				undoManager.undo();
+				undoAction.update();
+			}
+		}
+		
+		public void update()
+		{
+			this.putValue(Action.NAME,  undoManager.getUndoPresentationName());
+			this.setEnabled(undoManager.canUndo());
+		}
+	}
 }
